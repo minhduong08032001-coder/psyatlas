@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PsyAtlas</title>
+  <meta name="description" content="Sổ tay tra cứu cho sinh viên và người làm tâm lý lâm sàng: thuật ngữ, rối loạn, sinh lý thần kinh, thư viện sách.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side" id="side" aria-label="Điều hướng chính">
+    <a class="brand" href="#/">PsyAtlas<small>Sổ tay tâm lý lâm sàng</small></a>
+    <nav class="nav" id="nav">
+      <a href="#/" data-r="">Trang chủ</a>
+      <a href="#/learn" data-r="learn">Chương trình học</a>
+      <a href="#/terms" data-r="terms">Thuật ngữ <span class="count" id="c-terms"></span></a>
+      <a href="#/disorders" data-r="disorders">Rối loạn &amp; hội chứng <span class="count" id="c-dis"></span></a>
+      <a href="#/neuro" data-r="neuro">Sinh lý thần kinh</a>
+      <a href="#/books" data-r="books">Giáo trình</a>
+      <a href="#/library" data-r="library">Thư viện</a>
+    </nav>
+    <div class="side-foot">
+      <button class="icon-btn" id="theme" type="button">Đổi giao diện sáng/tối</button>
+      <span>Tài liệu học tập, không thay thế đánh giá lâm sàng hay chẩn đoán.</span>
+      <span class="attr">Một phần nội dung tóm lược từ <a href="https://openstax.org/details/books/psychology-2e" target="_blank" rel="noopener">Psychology 2e</a> (CC BY 4.0) và <a href="https://openstax.org/details/books/introduction-behavioral-neuroscience" target="_blank" rel="noopener">Introduction to Behavioral Neuroscience</a> (CC BY-NC-SA 4.0), OpenStax. Access for free at openstax.org. Chương mục đối chiếu thêm từ hai bản Introduction to Psychology (Stangor, CC BY-NC-SA 3.0).</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="side">Menu</button>
+      <div class="search">
+        <input id="q" type="search" placeholder="Tìm thuật ngữ, rối loạn, vùng não, chất dẫn truyền…" autocomplete="off" aria-label="Tìm kiếm toàn trang">
+        <span class="hint" aria-hidden="true">/</span>
+        <div class="results" id="results" hidden></div>
+      </div>
+    </header>
+    <main id="view" tabindex="-1"></main>
+  </div>
+</div>
+
+<script src="data/src.js"></script>
+<script src="data/terms.js"></script>
+<script src="data/terms2.js"></script>
+<script src="data/terms3.js"></script>
+<script src="data/terms4.js"></script>
+<script src="data/disorders.js"></script>
+<script src="data/disorders2.js"></script>
+<script src="data/neuro.js"></script>
+<script src="data/neuro2.js"></script>
+<script src="data/chapters.js"></script>
+<script src="data/extra.js"></script>
+<script src="data/xref.js"></script>
+<script src="data/learn.js"></script>
+<script src="js/util.js"></script>
+<script src="js/db.js"></script>
+<script src="js/library.js"></script>
+<script src="js/reader.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
