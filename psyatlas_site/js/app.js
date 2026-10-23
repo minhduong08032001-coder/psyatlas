@@ -96,8 +96,22 @@
     setNav(nav);
     document.getElementById("side").classList.remove("open");
     document.getElementById("menu").setAttribute("aria-expanded", "false");
-    ({ "": pageHome, learn: pageLearn, terms: pageTerms, disorders: pageDisorders, neuro: pageNeuro, books: pageBooks, read: pageRead, library: pageLibrary, e: pageEntry }[r.name] || pageHome)(r.arg);
+    ({ "": pageHome, learn: pageLearn, terms: pageTerms, disorders: pageDisorders, neuro: pageNeuro, books: pageBooks, read: pageRead, library: pageLibrary, news: pageNews, e: pageEntry }[r.name] || pageHome)(r.arg);
     window.scrollTo(0, 0);
+  }
+
+  /* ---------- Tin & tạp chí quốc tế ---------- */
+  function pageNews() {
+    document.title = "Tin & tạp chí quốc tế · PsyAtlas";
+    var items = (P.news || []).slice().sort(function (a, b) { return a.d < b.d ? 1 : -1; });
+    var last = items.length ? items[0].d : "";
+    view.innerHTML = '<h1>Tin &amp; tạp chí quốc tế</h1>' +
+      '<p class="lead">Tin, báo cáo và bài nổi bật về tâm lý học từ nguồn quốc tế, cập nhật định kỳ' + (last ? " (mục mới nhất: " + esc(last) + ")" : "") + '.</p>' +
+      '<div class="verify" role="note"><strong>Cần kiểm chứng.</strong> Mỗi mục chỉ là tóm tắt ngắn dựa trên trang tin hoặc tiêu đề. Hãy mở bài gốc, kiểm tra cỡ mẫu, thiết kế nghiên cứu và tạp chí trước khi dùng. Tin điểm nghiên cứu không phải bằng chứng đã được thẩm định.</div>' +
+      '<div class="panel"><h2>Tạp chí và nguồn tham khảo</h2><ul>' + (P.journals || []).map(function (j) { return '<li><a href="' + esc(j.u) + '" target="_blank" rel="noopener">' + esc(j.n) + "</a> <span class=\"muted\">" + esc(j.note) + "</span></li>"; }).join("") + "</ul></div>" +
+      '<div class="grid">' + items.map(function (n) {
+        return '<a class="card" href="' + esc(n.u) + '" target="_blank" rel="noopener"><h3>' + esc(n.t) + '</h3><div class="meta">' + esc(n.d) + " · " + esc(n.s) + " · " + esc(n.j) + " · " + esc(n.tag) + "</div><p>" + esc(n.vi) + "</p></a>";
+      }).join("") + "</div>";
   }
 
   /* ---------- Trang chủ ---------- */
@@ -113,7 +127,8 @@
       '<a class="tile" href="#/disorders"><h3>Rối loạn &amp; hội chứng</h3><p>' + P.disorders.length + " rối loạn: biểu hiện, chẩn đoán phân biệt, cơ sở thần kinh.</p></a>" +
       '<a class="tile" href="#/neuro"><h3>Sinh lý thần kinh</h3><p>Bản đồ não tương tác, chất dẫn truyền và tra từ biểu hiện sang vùng não.</p></a>' +
       '<a class="tile" href="#/books"><h3>Giáo trình</h3><p>Mục lục Psychology 2e và Behavioral Neuroscience, đánh dấu tiến độ đọc theo lộ trình 8 tháng.</p></a>' +
-      '<a class="tile" href="#/library"><h3>Thư viện</h3><p>Tải sách lên, ghi chú, theo dõi tiến độ đọc. Lưu cục bộ trên máy bạn.</p></a>' +
+      '<a class="tile" href="#/news"><h3>Tin &amp; tạp chí quốc tế</h3><p>' + (P.news || []).length + " tin, báo cáo và bài nổi bật, cập nhật hằng ngày.</p></a>" +
+      '<a class=\"tile\" href=\"#/library\"><h3>Thư viện</h3><p>Tải sách lên, ghi chú, theo dõi tiến độ đọc. Lưu cục bộ trên máy bạn.</p></a>' +
       "</div>" +
       '<div class="panel" id="flash"></div>' +
       '<div class="panel"><h2>Đã lưu</h2>' +
@@ -432,7 +447,7 @@
       chapters.forEach(function (c) { (byMonth[c.month] = byMonth[c.month] || []).push(c); });
       var order = [1, 2, 3, 4, 5, 6, 7, 8, 0].filter(function (m) { return byMonth[m]; });
       view.innerHTML = '<div class="page-head"><h1>Giáo trình</h1><p class="lead">Mục lục năm giáo trình gắn với lộ trình 8 tháng. Bấm tên một mục để đọc nội dung gốc (lấy từ file PDF của bạn trong Thư viện) và xem các sách khác viết về cùng chủ đề. Ô vuông để đánh dấu đã đọc.</p></div>' +
-        '<div class="tabs" id="btabs">' + ["psy", "nb", "ls", "sl", "gw"].map(function (k) { return '<button class="tab" data-b="' + k + '" aria-selected="' + (key === k) + '">' + esc(P.srcInfo[k].short) + "</button>"; }).join("") + "</div>" +
+        '<div class="tabs" id="btabs">' + ["psy", "nb", "ls", "sl", "gw", "fr"].map(function (k) { return '<button class="tab" data-b="' + k + '" aria-selected="' + (key === k) + '">' + esc(P.srcInfo[k].short) + "</button>"; }).join("") + "</div>" +
         '<div class="panel"><h2>' + esc(info.full) + '</h2><p class="muted">Giấy phép ' + esc(info.license) + '. Nguồn: <a href="' + esc(info.url) + '" target="_blank" rel="noopener">' + esc(info.url.replace(/^https?:\/\//, "").replace(/\/$/, "")) + "</a>" + (key === "psy" || key === "nb" ? " (Access for free at openstax.org)" : "") + ". Tiến độ: " + t[0] + "/" + t[1] + " mục đã đọc.</p></div>" +
         order.map(function (m) {
           return "<h2 class=\"bk-month\">" + esc(MONTHS[m]) + "</h2>" + byMonth[m].map(function (c) {

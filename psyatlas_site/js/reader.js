@@ -271,7 +271,8 @@ window.PsyReader = (function () {
     nb: function (n) { return /behavioral.?neuroscience/i.test(n); },
     ls: function (n) { return /^introduction to psychology\.pdf$/i.test(n.trim()); },
     sl: function (n) { return /^introduction to psychology \(1\)/i.test(n.trim()); },
-    gw: function (n) { return /gateways.to.mind.and.behavior|coon.and.mitterer/i.test(n); }
+    gw: function (n) { return /gateways.to.mind.and.behavior|coon.and.mitterer/i.test(n); },
+    fr: function (n) { return /general.introduction.to.psychoanalysis|freud/i.test(n); }
   };
   function findEntry(key, all) {
     var withFile = all.filter(function (b) { return b.blob; });
